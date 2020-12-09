@@ -19,7 +19,7 @@
 - Coredata 저장소
 
 ### 5. Scene : 화면전환과 관련된 파일
-- Cocoa 방식으로 앱을 구현할 때, 스토리보드에 scene을 추가하고 scene과 scene을 segue(세그웨이)로 연결학 segue가 자동으로 화면전환
+- Cocoa 방식으로 앱을 구현할 때, 스토리보드에 scene을 추가하고 scene과 scene을 segue(세그웨이)로 연결할 segue가 자동으로 화면전환
 - 스토리보드에 Scene을 추가하고, SceneCoordinator를 통해 화면 생성 및 화면 전환 
 - SceneCoordinator에서 storyboard ID를 사용해서 scene push하거나 modal로 표시하는 작업 처리
 - SceneCoordinatorType이라는 protocol을 구현해서 SceneCoordinator가 공통적으로 구현해야하는 멤버 선언
