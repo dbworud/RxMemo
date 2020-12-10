@@ -39,5 +39,8 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
                 cell.textLabel?.text = memo.content
             }
             .disposed(by: rx.disposeBag)
+        
+        // 3. +버튼과 Action을 Binding
+        addButton.rx.action = viewModel.makeAction()
     }
 }
