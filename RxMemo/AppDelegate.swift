@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 방법 #2. 처음화면 선언하기
         let coordinator = SceneCoordinator(window: window!)
-        let storage = MemoryStorage() // 이들에 대한 의존성은 아래 memoListViewModel의 생성자를 통해 주입된다   
+        let storage = MemoryStorage() // 이들에 대한 의존성은 아래 memoListViewModel의 생성자를 통해 주입된다
         
         let memoListViewModel = MemoListViewModel(title: "나의 메모 목록", sceneCoordinator: coordinator, storage: storage)
         let listScene = Scene.list(memoListViewModel)
