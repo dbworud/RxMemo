@@ -1,5 +1,13 @@
 # RxMemo
 
+## Libaray(출처: RxSwiftCommunity)
+- RxSwift: enable easy composition of asynchronous operations and event/data streams
+- RxCocoa: 기존의 코코아 프레임워크에 reactive library의 장점을 더함 
+- RxCoreData: RxSwift + CoreData 사용 시 
+- RxDataSources: data를 Observable sequence로 변환하여 UICollectionView와 UITableView에 데이터 바인딩 시 유용
+- Action: provide an abstraction of observables. workFactory(몇 개의 input을 받아 observable을 리턴하는 클로저) 패턴
+- NSObject-Rx: disposeBag을 일일히 선언하지 않고 .disposed(by: rx.disposeBag)
+
 ## Architecture Pattern 
 - 화면전환은 MVC패턴으로(Storyboard & Segue), 나머지 부분은 MVVM으로 구현 -> 익숙하지만 의존성 주입코드가 복잡해짐
 - Segue 사용하지 않고 ViewModel고 SceneCoordinator가 화면전환 처리 
