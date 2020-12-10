@@ -13,6 +13,11 @@
 - ViewModelBindableType에는 ViewController에 저장된 실제 ViewModel을 저장하고 bindViewModel()
 
 ### 3. ViewModel : 대부분의 비즈니스 로직 포함
+- 의존성을 주입(DI)하는 생성자 
+- Binding에 사용되는 속성과 메소드 
+- ViewModel에서 1. 화면전환 2. 메모저장 처리 by using SceneCoordinaor & MemoStorage
+- ViewModel을 생성하는 시점에 생성자를 통해 의존성을 주입
+- RxSwift에서는 Observable과 tableView를 바인딩하는 방식으로 데이터를 표시 = DataSource를 연결할 필요X
 
 ### 4. Service : 메모 저장소와 관련된 파일
 - 메모리 저장소
