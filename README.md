@@ -26,6 +26,7 @@
 - ViewModel에서 1. 화면전환 2. 메모저장 처리 by using SceneCoordinaor & MemoStorage
 - ViewModel을 생성하는 시점에 생성자를 통해 의존성을 주입
 - RxSwift에서는 Observable과 tableView를 바인딩하는 방식으로 데이터를 표시 = DataSource를 연결할 필요X
+- 메모 목록에서 메모 쓰기로 전환할 때 MemoListViewModel에서 화면전환 코드 작성 
 
 ### 4. Service : 메모 저장소와 관련된 파일
 - 메모리 저장소
