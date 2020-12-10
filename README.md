@@ -1,6 +1,6 @@
 # RxMemo
 
-## Libaray(출처: RxSwiftCommunity)
+## Library(출처: RxSwiftCommunity)
 - RxSwift: enable easy composition of asynchronous operations and event/data streams
 - RxCocoa: 기존의 코코아 프레임워크에 reactive library의 장점을 더함 
 - RxCoreData: RxSwift + CoreData 사용 시 
