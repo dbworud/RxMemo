@@ -12,9 +12,24 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
+    // SceneDelegate를 info.plist에서 비활성화하고 window 속성 추가
+    var window: UIWindow?
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+       
+        // 방법 #1. Main.storyboard에서 entry point 움직이기
+        
+        // 방법 #2. 처음화면 선언하기
+        let coordinator = SceneCoordinator(window: window!)
+        let storage = MemoryStorage() // 이들에 대한 의존성은 아래 memoListViewModel의 생성자를 통해 주입된다   
+        
+        let memoListViewModel = MemoListViewModel(title: "나의 메모 목록", sceneCoordinator: coordinator, storage: storage)
+        let listScene = Scene.list(memoListViewModel)
+        
+        // Coordinator에서 transition 메소드를 호출하고 listScene을 rootScene으로 설정하기
+        coordinator.transition(to: listScene, using: .root, animated: false)
+        
         return true
     }
 
