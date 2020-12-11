@@ -65,7 +65,7 @@ class SceneCoordinator: SceneCoordinatorType {
                         self.currentVC = event.viewController.sceneViewController // 구독자를 추가하고 currentVC 속성을 update
                     })
                     .disposed(by: bag)
-                // 결과: 이전처럼 backButton 형식으로 표시됨  
+                // 결과: 이전처럼 backButton 형식으로 표시됨
                 
                 
                 // 해당하는 Scene을 nav에 push & onCompleted

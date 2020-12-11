@@ -47,4 +47,28 @@ class MemoDetailViewModel : CommonViewModel {
         return self.sceneCoordinator.close(animated: true)
             .asObservable().map{ _ in }
     }
+    
+    // 여기에서 리턴하는 액션은 ComposeViewModel로 전달하는 Action
+    func performUpdate(memo: Memo) -> Action<String, Void> {
+        return Action { input in // 입력값 input으로 memo update
+            return self.storage.update(memo: memo, content: input) // return type은 편집된 메모 방출
+                .map { _ in  } // return type이 Void가 됨
+        }
+    }
+    
+    // EditButton을 눌렀을 때의 Action -> 이후, DetailViewController에 있는 EditButton과 Binding
+    func makeEditAction() -> CocoaAction {
+        return CocoaAction { _ in
+            // 1. ComposeViewModel 생성, content 파라미터에 편집할 내용
+            let composeViewModel = MemoComposeViewModel(title: "메모 편집", content: self.memo.content, sceneCoordinator: self.sceneCoordinator, storage: self.storage, saveAction: self.performUpdate(memo: self.memo))
+            
+            // 2. ComposeScene생성
+            let composeScene = Scene.compose(composeViewModel)
+            
+            // Scene을 modal 형식으로 표시
+            return self.sceneCoordinator.transition(to: composeScene, using: .modal, animated: true).asObservable()
+                .map{ _ in }
+        }
+        
+    }
 }

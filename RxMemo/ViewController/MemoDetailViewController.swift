@@ -65,5 +65,7 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = backButton// default된 backbutton 대체
         */
+        
+        editButton.rx.action = viewModel.makeEditAction() // View(ViewController)와 ViewModel을 Binding
     }
 }
