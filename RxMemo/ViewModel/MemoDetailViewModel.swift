@@ -49,10 +49,22 @@ class MemoDetailViewModel : CommonViewModel {
     }
     
     // 여기에서 리턴하는 액션은 ComposeViewModel로 전달하는 Action
+    
+    // Subject와 binding 되어있는데 subject가 수정한 내용을 다시 방출하도록 해야 버그가 fix
     func performUpdate(memo: Memo) -> Action<String, Void> {
         return Action { input in // 입력값 input으로 memo update
-            return self.storage.update(memo: memo, content: input) // return type은 편집된 메모 방출
-                .map { _ in  } // return type이 Void가 됨
+            self.storage.update(memo: memo, content: input) // return type은 편집된 메모 방출
+                // .map { _ in  } // return type이 Void가 됨
+                // 새로운 구독자를 추가하고 subject로 업데이트된 메모를 전달
+                .subscribe(onNext: { updated in
+                    self.contents.onNext([
+                        updated.content,
+                        self.formatter.string(from: updated.insertDate)
+                    ])
+                })
+                .disposed(by: self.rx.disposeBag)
+            
+            return Observable.empty()
         }
     }
     
