@@ -35,9 +35,7 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
         
         // 2. 메모 목록을 tableView에 Binding하면 끝
         viewModel.memoList
-            .bind(to: listTableView.rx.items(cellIdentifier: "cell")) { row, memo, cell in
-                cell.textLabel?.text = memo.content
-            }
+            .bind(to: listTableView.rx.items(dataSource: viewModel.dataSource))
             .disposed(by: rx.disposeBag)
         
         // 3. +버튼과 Action을 Binding
@@ -66,6 +64,11 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
             .disposed(by: rx.disposeBag)
         // 이 메소드는 컨트롤 이벤트를 리턴
         // 컨트롤 이벤트는 메모를 삭제할 때마다 next event를 방출
+        
+        // Row Animation 구현 #1. 직접 Delegate 메소드 구현 -> 이전 코드가 동작하지 않음 -> RxDataSources로 해결
+        // RxDataSources는 테이블뷰와 콜렉션뷰에 바인딩할 수 있는 data source를 제공
+        // 새로운 library 추가로 인해 여러 파일을 수정해야함(1. Model>Memo, )
+        
         
      }
 }

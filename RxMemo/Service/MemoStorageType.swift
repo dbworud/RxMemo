@@ -15,7 +15,7 @@ protocol MemoStorageType {
     func create(content: String) -> Observable<Memo>// return 형식이 Observable이면 구독자가 작업 결과를 원하는 방식으로 처리 가능
     
     @discardableResult
-    func memoList() -> Observable<[Memo]>
+    func memoList() -> Observable<[MemoSectionModel]>
     
     @discardableResult
     func update(memo: Memo, content: String) -> Observable<Memo>

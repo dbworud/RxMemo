@@ -6,13 +6,13 @@
 //
 
 import Foundation
-import SwiftUI
+import RxDataSources // IdentifiableType 필수
 
 // 클래스 (class or struct) : 설계도, 틀
-struct Memo : Equatable {
-    
+struct Memo : Equatable, IdentifiableType {
+ 
     // 객체 (object) : 설계도 안에서 구현할 대상
-    var id: String // 메모 구분, Equatable
+    var identity: String // 메모 구분, Equatable
     var content: String
     var insertDate: Date
     
@@ -22,7 +22,7 @@ struct Memo : Equatable {
     init(content: String, insertDate : Date = Date()) {
         self.content = content
         self.insertDate = insertDate
-        self.id = "\(insertDate.timeIntervalSinceReferenceDate)"
+        self.identity = "\(insertDate.timeIntervalSinceReferenceDate)"
     }
     
     // 새로운 메모로 업데이트될 때 사용하는 생성자

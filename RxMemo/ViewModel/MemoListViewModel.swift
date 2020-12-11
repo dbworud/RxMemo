@@ -5,17 +5,40 @@
 //  Created by jaekyung you on 2020/12/09.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 import Action
+import RxDataSources
+
+// 메모목록은 하나의 Section에서 표시되고 테이블뷰에 섹션 헤더나 섹션 포터를 표시하지 않음 -> Section data 신경쓸 필요 없음
+typealias MemoSectionModel = AnimatableSectionModel<Int, Memo> // Section data type: Int, Row data type: Memo
 
 class MemoListViewModel : CommonViewModel {
+    // 테이블뷰에 바인딩할 DataSource 속성 선언
+    let dataSource: RxTableViewSectionedAnimatedDataSource<MemoSectionModel> = {
+        let ds = RxTableViewSectionedAnimatedDataSource<MemoSectionModel>(configureCell: {
+            (dataSource, tableView, indexPath, memo) -> UITableViewCell in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.textLabel?.text = memo.content
+            return cell
+        })
+        
+        ds.canEditRowAtIndexPath = {(_, _) in return true}
+        return ds
+    }()
     
     // 메모목록이 구현될 tableView와 Binding될 속성 : 메모목록
-    var memoList : Observable<[Memo]> { // 메모 배열 방출
+    var memoList : Observable<[MemoSectionModel]> { // 메모 배열 방출
         return storage.memoList()
     }
+    // Observable이 [memo]을 방출하는 형태를 RxDataSources가 원하는 방식으로 바꿔야 함
+    // Section 모델을 생성한 다음에 여기에 section data & row data 저장하고
+    // Observable이 Section 모델을 방출하도록 해야함
+    // RxDataSources 제공하는 기본 모델인 Animatable Section
+    
+    
+    
     
     // 메모목록 화면 상단의 +버튼을 누르면 modal방식으로 메모쓰기 화면 표시
     // +버튼과 바인딩할 Action 구현
