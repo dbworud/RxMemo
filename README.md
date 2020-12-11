@@ -2,7 +2,7 @@
 출처: KxCoding
 
 # Screenshot
-![ezgif com-video-to-gif, 50%](https://user-images.githubusercontent.com/59492694/101867436-7fddcf00-3bbe-11eb-85a9-62ad6eb0aa07.gif)
+![ezgif com-resize](https://user-images.githubusercontent.com/59492694/101868272-5160f380-3bc0-11eb-8962-868e8655c265.gif)
 
 
 ## Library(출처: RxSwiftCommunity)
