@@ -49,7 +49,6 @@ class MemoDetailViewModel : CommonViewModel {
     }
     
     // 여기에서 리턴하는 액션은 ComposeViewModel로 전달하는 Action
-    
     // Subject와 binding 되어있는데 subject가 수정한 내용을 다시 방출하도록 해야 버그가 fix
     func performUpdate(memo: Memo) -> Action<String, Void> {
         return Action { input in // 입력값 input으로 memo update

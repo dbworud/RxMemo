@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MemoDetailViewController: UIViewController, ViewModelBindableType {
 
@@ -66,6 +68,19 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
         navigationItem.leftBarButtonItem = backButton// default된 backbutton 대체
         */
         
+        // #1. rx의 action 방식을 활용
         editButton.rx.action = viewModel.makeEditAction() // View(ViewController)와 ViewModel을 Binding
+        
+        // #2. rx의 tap 방식을 활용
+        shareButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance) // 더블탭 방지
+            .subscribe(onNext: { [weak self] _ in
+                guard let memo = self?.viewModel.memo.content else { return }
+                
+                // content배열로 구성된 memo에 대한 service
+                let vc = UIActivityViewController(activityItems: [memo], applicationActivities: nil)
+                self?.present(vc, animated: true, completion: nil)
+            })
+            .disposed(by: rx.disposeBag)
     }
 }
