@@ -60,6 +60,12 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
             .bind(to: viewModel.detailAction.inputs) // 전달된 메모를 ViewModel의 detailAction과 Binding
             .disposed(by: rx.disposeBag)
         
+        // delegate활용하지 않고 RxCocoa가 제공하는 메소드, Swipe to delete 구현
+        listTableView.rx.modelDeleted(Memo.self)
+            .bind(to: viewModel.deleteAction.inputs) // viewModel의 deleteAction과 바인딩
+            .disposed(by: rx.disposeBag)
+        // 이 메소드는 컨트롤 이벤트를 리턴
+        // 컨트롤 이벤트는 메모를 삭제할 때마다 next event를 방출
         
      }
 }

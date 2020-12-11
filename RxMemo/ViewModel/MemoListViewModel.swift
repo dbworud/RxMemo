@@ -71,5 +71,11 @@ class MemoListViewModel : CommonViewModel {
         }
     }()
 
-    
+    // 테이블뷰에서 메모 삭제 구현, Never = no need to return a value
+    lazy var deleteAction: Action<Memo, Swift.Never> = {
+        return Action { memo in
+            // 이전화면으로 돌아가는 코드 구현없이 삭제만 하면 됨
+            return self.storage.delete(memo: memo).ignoreElements() // Swift.Never 즉 리턴값이 필요없기 때문에 ignoreElements()로 completed/error 여부만 
+        }
+    }()
 }
