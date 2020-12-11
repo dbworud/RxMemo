@@ -1,7 +1,7 @@
 # RxMemo
 출처: KxCoding
 
-![화면 기록 2020-12-11 오후 2 25 44 2](https://user-images.githubusercontent.com/59492694/101866797-16a98c00-3bbd-11eb-9de8-1d8a6a85194d.gif)
+https://user-images.githubusercontent.com/59492694/101866797-16a98c00-3bbd-11eb-9de8-1d8a6a85194d.gif
 
 ## Library(출처: RxSwiftCommunity)
 - RxSwift: enable easy composition of asynchronous operations and event/data streams
