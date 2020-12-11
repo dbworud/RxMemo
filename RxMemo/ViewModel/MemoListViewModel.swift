@@ -55,4 +55,21 @@ class MemoListViewModel : CommonViewModel {
         }
     }
     
+    // 이번에는 메소드를 구현하는 것이 아니라 속성 형태로 구현
+    // 메모목록->보기 화면전환
+    lazy var detailAction : Action<Memo, Void> = {
+        return Action { memo in
+            // 1. ViewModel 생성
+            let detailViewModel = MemoDetailViewModel(memo: memo, title: "메모 보기", sceneCoordinator: self.sceneCoordinator, storage: self.storage)
+            
+            // 2. Scene 생성
+            let detailScene = Scene.detail(detailViewModel)
+            
+            // 3. SceneCoordinator로 transition 메소드 구현
+            return self.sceneCoordinator.transition(to: detailScene, using: .push, animated: true) 
+                .asObservable().map{ _ in }
+        }
+    }()
+
+    
 }

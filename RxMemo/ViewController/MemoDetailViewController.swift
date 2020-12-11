@@ -52,5 +52,18 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
                 }
             }
             .disposed(by: rx.disposeBag)
+        
+        /* 기존의 backButton과 다른 문제점 -> SceneCoordinator에서 수정
+        var backButton = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
+        // title이 driver형태이기 때문에 title 생성자로는 전달할 수 없음
+        viewModel.title
+            .drive(backButton.rx.title)
+            .disposed(by: rx.disposeBag)
+        
+        backButton.rx.action = viewModel.popAction
+        // backButton의 style만 변경될 뿐, action은 여전하기 때문에 backButton을 숨기고 leftBarButtonItem로 넣음
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = backButton// default된 backbutton 대체
+        */
     }
 }

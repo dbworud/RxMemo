@@ -39,4 +39,12 @@ class MemoDetailViewModel : CommonViewModel {
         
         super.init(title: title, sceneCoordinator: sceneCoordinator, storage: storage)
     }
+    
+    // navigationController와 SceneCoordinator는 아무 연관이 없기 때문에 뒤로가기를 눌러도 현재화면이 pop되고 이전화면으로 돌아갈 뿐
+    // currentVC, 즉 MemoDetailViewController는 다시 nil이 되어 else 문 호출
+    // 따라서 back button과 close함수를 binding 필요
+    lazy var popAction = CocoaAction { [unowned self] in
+        return self.sceneCoordinator.close(animated: true)
+            .asObservable().map{ _ in }
+    }
 }

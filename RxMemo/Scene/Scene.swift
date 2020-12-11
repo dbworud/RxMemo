@@ -40,7 +40,7 @@ extension Scene {
             
         case .detail(let viewModel):
             // 해당 Scene은 항상 Navigation Stack에 push되기 때문에 UINavigationController 고려할 필요가 없음
-            guard var detailVC = storyboard.instantiateViewController(withIdentifier: "MemoDetailViewController") as? MemoDetailViewController else {
+            guard var detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as? MemoDetailViewController else {
                 fatalError()
             }
             

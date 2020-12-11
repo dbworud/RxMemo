@@ -42,5 +42,24 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
         
         // 3. +버튼과 Action을 Binding
         addButton.rx.action = viewModel.makeAction()
-    }
+        
+        // 테이블뷰에서 메모를 선택하면 ViewModel의 detailAction을 통해서 전달 -> 선택한 메모 필요
+        
+        // 선택한 셀은 선택해제 -> indexPath 필요. RxCocoa에서 선택 이벤트 처리를 extension으로 제공
+        
+        // 선택한 indexPath 필요 시: itemSelected 속성 사용
+        // 선택한 데이터(메모) 필요 시: modelSelected 메소드 사용
+        
+        // zip: 두 멤버가 리턴하는 Observable을 병합 -> Tuple형태로 방출
+        Observable.zip(listTableView.rx.modelSelected(Memo.self),listTableView.rx.itemSelected)
+            // Next event가 전달되면 선택 상태를 해제
+            .do(onNext: { [unowned self] (_, indexPath) in // [unowned self]: 옵셔널을 인정하지 않는 약한 참조
+                self.listTableView.deselectRow(at: indexPath, animated: true)
+            }) // 이후 indexPath가 필요없기 때문에 map 연산자로 데이터만 방출
+            .map { $0.0 }
+            .bind(to: viewModel.detailAction.inputs) // 전달된 메모를 ViewModel의 detailAction과 Binding
+            .disposed(by: rx.disposeBag)
+        
+        
+     }
 }
